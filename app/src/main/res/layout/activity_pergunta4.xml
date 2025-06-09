@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayoutP4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pergunta4Activity">
+
+    <!-- Layout para os elementos da pergunta (será escondido) -->
+    <LinearLayout
+        android:id="@+id/contentLayoutPerguntasP4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"> <!-- Inicialmente visível -->
+
+        <TextView
+            android:id="@+id/textViewNumeroPergunta4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pergunta 4 de 4"
+            android:textSize="16sp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/textViewPergunta4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Qual destas qualidades mais te define?"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingMultiplier="1.2"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupPergunta4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="32dp">
+
+            <RadioButton
+                android:id="@+id/rbP4Opcao1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lealdade"
+                android:textSize="18sp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioButton
+                android:id="@+id/rbP4Opcao2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Independência"
+                android:textSize="18sp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioButton
+                android:id="@+id/rbP4Opcao3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Curiosidade"
+                android:textSize="18sp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioButton
+                android:id="@+id/rbP4Opcao4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calma e paciência"
+                android:textSize="18sp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnProximoP4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver Resultado"
+        android:textSize="18sp"
+        app:backgroundTint="#00796B"
+        android:textColor="@android:color/white"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"/>
+
+    </LinearLayout>
+
+    <!-- Container para o Fragmento de Resultado (inicialmente escondido) -->
+    <!-- Este FrameLayout ocupará toda a tela quando visível -->
+    <FrameLayout
+        android:id="@+id/fragment_container_resultado_p4_wrapper"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"> <!-- Inicialmente escondido -->
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_resultado_p4"
+            android:name="com.example.ap2.ResultadoFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_resultado"/>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

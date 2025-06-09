@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_vertical"
+    tools:context=".Pergunta3Activity">
+
+    <TextView
+        android:id="@+id/textViewNumeroPergunta3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pergunta 3 de 4"
+        android:textSize="16sp"
+        android:layout_gravity="end"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewPergunta3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seu ambiente ideal é:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        android:gravity="center_horizontal"
+        android:lineSpacingMultiplier="1.2"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupPergunta3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonP3OpcaoA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Uma floresta densa ou montanhas selvagens."
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonP3OpcaoB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Um lugar quente e ensolarado, talvez perto da água."
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonP3OpcaoC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Uma cidade movimentada com muitas coisas acontecendo."
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonP3OpcaoD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Um local tranquilo e isolado para pensar."
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnProximaPergunta3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Próxima Pergunta"
+        android:textSize="18sp"
+        app:backgroundTint="#00796B"
+        android:textColor="@android:color/white"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"/>
+
+</LinearLayout>

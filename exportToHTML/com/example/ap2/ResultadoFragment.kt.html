@@ -1,0 +1,390 @@
+<html>
+<head>
+<title>ResultadoFragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ResultadoFragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">ap2 </span><span class="s3">// Substitua pelo seu nome de pacote</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">ActivityNotFoundException</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.</span><span class="s1">Uri</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">ViewGroup</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">ImageView</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Toast</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span>
+
+<span class="s0">class </span><span class="s1">ResultadoFragment : Fragment</span><span class="s2">() {</span>
+
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">nomeUsuario: String? </span><span class="s2">= </span><span class="s0">null</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">respostaP1: String? </span><span class="s2">= </span><span class="s0">null</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">respostaP2: String? </span><span class="s2">= </span><span class="s0">null</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">respostaP3: String? </span><span class="s2">= </span><span class="s0">null</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">respostaP4: String? </span><span class="s2">= </span><span class="s0">null</span>
+
+    <span class="s3">// --- NOSSOS ANIMAIS ---</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">LOBO </span><span class="s2">= </span><span class="s4">&quot;LOBO&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">GATO </span><span class="s2">= </span><span class="s4">&quot;GATO&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">LEAO </span><span class="s2">= </span><span class="s4">&quot;LEÃO&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">CACHORRO </span><span class="s2">= </span><span class="s4">&quot;CACHORRO&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">CORUJA </span><span class="s2">= </span><span class="s4">&quot;CORUJA&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">AGUIA </span><span class="s2">= </span><span class="s4">&quot;ÁGUIA&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">URSO </span><span class="s2">= </span><span class="s4">&quot;URSO&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">RAPOSA </span><span class="s2">= </span><span class="s4">&quot;RAPOSA&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">CERVO </span><span class="s2">= </span><span class="s4">&quot;CERVO&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">GOLFINHO </span><span class="s2">= </span><span class="s4">&quot;GOLFINHO&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">TARTARUGA </span><span class="s2">= </span><span class="s4">&quot;TARTARUGA&quot;</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">ESPIRITO_LIVRE </span><span class="s2">= </span><span class="s4">&quot;ESPÍRITO LIVRE&quot;</span>
+    <span class="s3">// Adicione mais constantes de animais se precisar</span>
+
+    <span class="s1">companion </span><span class="s0">object </span><span class="s2">{</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">NOME_USUARIO_KEY_ARG </span><span class="s2">= </span><span class="s4">&quot;NOME_USUARIO&quot;</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">RESPOSTA_P1_KEY_ARG </span><span class="s2">= </span><span class="s4">&quot;RESPOSTA_PERGUNTA_1&quot;</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">RESPOSTA_P2_KEY_ARG </span><span class="s2">= </span><span class="s4">&quot;RESPOSTA_PERGUNTA_2&quot;</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">RESPOSTA_P3_KEY_ARG </span><span class="s2">= </span><span class="s4">&quot;RESPOSTA_PERGUNTA_3&quot;</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">RESPOSTA_P4_KEY_ARG </span><span class="s2">= </span><span class="s4">&quot;RESPOSTA_PERGUNTA_4&quot;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState: Bundle?</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">)</span>
+        <span class="s1">arguments?</span><span class="s2">.</span><span class="s1">let </span><span class="s2">{</span>
+            <span class="s1">nomeUsuario </span><span class="s2">= </span><span class="s1">it</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">NOME_USUARIO_KEY_ARG</span><span class="s2">)</span>
+            <span class="s1">respostaP1 </span><span class="s2">= </span><span class="s1">it</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">RESPOSTA_P1_KEY_ARG</span><span class="s2">)</span>
+            <span class="s1">respostaP2 </span><span class="s2">= </span><span class="s1">it</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">RESPOSTA_P2_KEY_ARG</span><span class="s2">)</span>
+            <span class="s1">respostaP3 </span><span class="s2">= </span><span class="s1">it</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">RESPOSTA_P3_KEY_ARG</span><span class="s2">)</span>
+            <span class="s1">respostaP4 </span><span class="s2">= </span><span class="s1">it</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">RESPOSTA_P4_KEY_ARG</span><span class="s2">)</span>
+        <span class="s2">}</span>
+        <span class="s1">Log</span><span class="s2">.</span><span class="s1">i</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Dados recebidos: Nome=</span><span class="s0">$</span><span class="s1">nomeUsuario</span><span class="s4">, P1=</span><span class="s0">$</span><span class="s1">respostaP1</span><span class="s4">, P2=</span><span class="s0">$</span><span class="s1">respostaP2</span><span class="s4">, P3=</span><span class="s0">$</span><span class="s1">respostaP3</span><span class="s4">, P4=</span><span class="s0">$</span><span class="s1">respostaP4</span><span class="s4">&quot;</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreateView</span><span class="s2">(</span>
+        <span class="s1">inflater: LayoutInflater</span><span class="s2">, </span><span class="s1">container: ViewGroup?</span><span class="s2">,</span>
+        <span class="s1">savedInstanceState: Bundle?</span>
+    <span class="s2">)</span><span class="s1">: View? </span><span class="s2">{</span>
+        <span class="s0">val </span><span class="s1">view </span><span class="s2">= </span><span class="s1">inflater</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">fragment_resultado</span><span class="s2">, </span><span class="s1">container</span><span class="s2">, </span><span class="s0">false</span><span class="s2">)</span>
+
+        <span class="s0">val </span><span class="s1">textViewNomeUsuario </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textViewNomeUsuarioResultado</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">textViewAnimalResultado </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textViewAnimalResultado</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">textViewDescricaoAnimal </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textViewDescricaoAnimal</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">btnRefazerQuiz </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">Button</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">btnRefazerQuiz</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">btnSaibaMais </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">Button</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">btnSaibaMais</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">imageViewAnimal </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">ImageView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">imageViewAnimal</span><span class="s2">)</span>
+
+        <span class="s1">textViewNomeUsuario</span><span class="s2">.</span><span class="s1">text </span><span class="s2">= </span><span class="s4">&quot;Olá, </span><span class="s0">${</span><span class="s1">nomeUsuario ?: </span><span class="s4">&quot;Aventureiro(a)&quot;</span><span class="s0">}</span><span class="s4">!&quot;</span>
+
+        <span class="s0">val </span><span class="s2">(</span><span class="s1">animal</span><span class="s2">, </span><span class="s1">descricao</span><span class="s2">) = </span><span class="s1">determinarAnimal</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">imagemResource </span><span class="s2">= </span><span class="s1">obterImagemResourceParaAnimal</span><span class="s2">(</span><span class="s1">animal</span><span class="s2">)</span>
+
+        <span class="s1">textViewAnimalResultado</span><span class="s2">.</span><span class="s1">text </span><span class="s2">= </span><span class="s1">animal</span>
+        <span class="s1">textViewDescricaoAnimal</span><span class="s2">.</span><span class="s1">text </span><span class="s2">= </span><span class="s1">descricao</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">imagemResource </span><span class="s2">!= </span><span class="s5">0</span><span class="s2">) {</span>
+            <span class="s1">imageViewAnimal</span><span class="s2">.</span><span class="s1">setImageResource</span><span class="s2">(</span><span class="s1">imagemResource</span><span class="s2">)</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s3">// Tente usar um placeholder específico para ESPIRITO_LIVRE se não tiver um para o animal</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">animal </span><span class="s2">== </span><span class="s1">ESPIRITO_LIVRE</span><span class="s2">) {</span>
+                <span class="s1">imageViewAnimal</span><span class="s2">.</span><span class="s1">setImageResource</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">espirito_livre_placeholder</span><span class="s2">)</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">imageViewAnimal</span><span class="s2">.</span><span class="s1">setImageResource</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">placeholder_animal</span><span class="s2">) </span><span class="s3">// Imagem placeholder genérica</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">btnRefazerQuiz</span><span class="s2">.</span><span class="s1">setOnClickListener </span><span class="s2">{</span>
+            <span class="s0">val </span><span class="s1">intent: Intent? </span><span class="s2">= </span><span class="s0">if </span><span class="s2">(</span><span class="s1">activity?</span><span class="s2">.</span><span class="s1">packageName </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">activity?</span><span class="s2">.</span><span class="s1">packageManager?</span><span class="s2">.</span><span class="s1">getLaunchIntentForPackage</span><span class="s2">(</span><span class="s1">requireActivity</span><span class="s2">().</span><span class="s1">packageName</span><span class="s2">)</span><span class="s1">?</span><span class="s2">.</span><span class="s1">apply </span><span class="s2">{</span>
+                    <span class="s1">addFlags</span><span class="s2">(</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">FLAG_ACTIVITY_NEW_TASK or Intent</span><span class="s2">.</span><span class="s1">FLAG_ACTIVITY_CLEAR_TASK</span><span class="s2">)</span>
+                <span class="s2">} </span><span class="s1">?: run </span><span class="s2">{</span>
+                    <span class="s3">// Fallback se você não tiver uma TelaBoasVindasActivity ou MainActivity como launcher</span>
+                    <span class="s3">// e quiser ir direto para a Pergunta1Activity.</span>
+                    <span class="s3">// Ajuste 'com.example.ap2.Pergunta1Activity' para o nome completo da sua Pergunta1Activity.</span>
+                    <span class="s3">// Intent(activity, Class.forName(&quot;com.example.ap2.Pergunta1Activity&quot;)).apply {</span>
+                    <span class="s3">//    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)</span>
+                    <span class="s3">// }</span>
+                    <span class="s0">null </span><span class="s3">// Deixe nulo se o getLaunchIntentForPackage for a melhor abordagem geral</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">null</span>
+            <span class="s2">}</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">intent </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s0">try </span><span class="s2">{</span>
+                    <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">)</span>
+                    <span class="s1">activity?</span><span class="s2">.</span><span class="s1">finishAffinity</span><span class="s2">()</span>
+                <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s1">e: Exception</span><span class="s2">) {</span>
+                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s4">&quot;Não foi possível reiniciar o quiz.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">()</span>
+                    <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Erro ao tentar reiniciar o quiz&quot;</span><span class="s2">, </span><span class="s1">e</span><span class="s2">)</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s4">&quot;Não foi possível reiniciar o quiz (intent nulo).&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">()</span>
+                <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Intent para reiniciar o quiz é nulo.&quot;</span><span class="s2">)</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">btnSaibaMais</span><span class="s2">.</span><span class="s1">setOnClickListener </span><span class="s2">{</span>
+            <span class="s0">val </span><span class="s1">animalNome </span><span class="s2">= </span><span class="s1">textViewAnimalResultado</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">()</span>
+            <span class="s0">val </span><span class="s1">url </span><span class="s2">= </span><span class="s1">obterUrlParaAnimal</span><span class="s2">(</span><span class="s1">animalNome</span><span class="s2">)</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">url</span><span class="s2">.</span><span class="s1">isNotEmpty</span><span class="s2">()) {</span>
+                <span class="s0">try </span><span class="s2">{</span>
+                    <span class="s0">val </span><span class="s1">intentWeb </span><span class="s2">= </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">ACTION_VIEW</span><span class="s2">, </span><span class="s1">Uri</span><span class="s2">.</span><span class="s1">parse</span><span class="s2">(</span><span class="s1">url</span><span class="s2">))</span>
+                    <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intentWeb</span><span class="s2">)</span>
+                <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s1">e: ActivityNotFoundException</span><span class="s2">) {</span>
+                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s4">&quot;Nenhum aplicativo encontrado para abrir links da web.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_LONG</span><span class="s2">).</span><span class="s1">show</span><span class="s2">()</span>
+                <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s1">e: Exception</span><span class="s2">) {</span>
+                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s4">&quot;Não foi possível abrir o link.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">()</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s4">&quot;Link não disponível para este resultado.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">()</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">view</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">obterUrlParaAnimal</span><span class="s2">(</span><span class="s1">animalNome: String</span><span class="s2">)</span><span class="s1">: String </span><span class="s2">{</span>
+        <span class="s0">val </span><span class="s1">baseUrl </span><span class="s2">= </span><span class="s4">&quot;https://pt.wikipedia.org/wiki/&quot;</span>
+        <span class="s0">return when </span><span class="s2">(</span><span class="s1">animalNome</span><span class="s2">.</span><span class="s1">uppercase</span><span class="s2">()) {</span>
+            <span class="s1">LOBO </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Lobo&quot;</span>
+            <span class="s1">GATO </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Gato&quot;</span>
+            <span class="s1">LEAO </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Leão&quot;</span>
+            <span class="s1">CACHORRO </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Cão&quot; </span><span class="s3">// Wikipedia usa &quot;Cão&quot;</span>
+            <span class="s1">CORUJA </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Coruja&quot;</span>
+            <span class="s1">AGUIA </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Águia&quot;</span>
+            <span class="s1">URSO </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Urso&quot;</span>
+            <span class="s1">RAPOSA </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Raposa&quot;</span>
+            <span class="s1">CERVO </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Cervo&quot;</span>
+            <span class="s1">GOLFINHO </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Golfinho&quot;</span>
+            <span class="s1">TARTARUGA </span><span class="s2">-&gt; </span><span class="s1">baseUrl </span><span class="s2">+ </span><span class="s4">&quot;Tartaruga&quot;</span>
+            <span class="s1">ESPIRITO_LIVRE </span><span class="s2">-&gt; </span><span class="s4">&quot;https://www.google.com/search?q=espírito+livre+significado&quot;</span>
+            <span class="s0">else </span><span class="s2">-&gt; </span><span class="s4">&quot;&quot;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">obterImagemResourceParaAnimal</span><span class="s2">(</span><span class="s1">animalNome: String</span><span class="s2">)</span><span class="s1">: Int </span><span class="s2">{</span>
+        <span class="s3">// Certifique-se que você tem esses drawables no seu projeto (ex: res/drawable/lobo.png)</span>
+        <span class="s0">return when </span><span class="s2">(</span><span class="s1">animalNome</span><span class="s2">) {</span>
+            <span class="s1">LOBO </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">lobo</span>
+            <span class="s1">GATO </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">gato</span>
+            <span class="s1">LEAO </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">leao</span>
+            <span class="s1">CACHORRO </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">cachorro </span><span class="s3">// crie R.drawable.cachorro</span>
+            <span class="s1">CORUJA </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">coruja     </span><span class="s3">// crie R.drawable.coruja</span>
+            <span class="s1">AGUIA </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">aguia      </span><span class="s3">// crie R.drawable.aguia</span>
+            <span class="s1">URSO </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">urso        </span><span class="s3">// crie R.drawable.urso</span>
+            <span class="s1">RAPOSA </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">raposa    </span><span class="s3">// crie R.drawable.raposa</span>
+            <span class="s1">CERVO </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">cervo      </span><span class="s3">// crie R.drawable.cervo</span>
+            <span class="s1">GOLFINHO </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">golfinho</span><span class="s3">// crie R.drawable.golfinho</span>
+            <span class="s1">TARTARUGA </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">tartaruga</span><span class="s3">// crie R.drawable.tartaruga</span>
+            <span class="s1">ESPIRITO_LIVRE </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">espirito_livre_placeholder </span><span class="s3">// Mantenha ou crie um placeholder</span>
+            <span class="s0">else </span><span class="s2">-&gt; </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">placeholder_animal </span><span class="s3">// Um placeholder genérico</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">determinarAnimal</span><span class="s2">()</span><span class="s1">: Pair</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; {</span>
+        <span class="s0">var </span><span class="s1">pontuacaoLobo </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoGato </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoLeao </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoCachorro </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoCoruja </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoAguia </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoUrso </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoRaposa </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoCervo </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoGolfinho </span><span class="s2">= </span><span class="s5">0</span>
+        <span class="s0">var </span><span class="s1">pontuacaoTartaruga </span><span class="s2">= </span><span class="s5">0</span>
+
+        <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Respostas para determinar animal: P1='</span><span class="s0">${</span><span class="s1">respostaP1</span><span class="s0">}</span><span class="s4">', P2='</span><span class="s0">${</span><span class="s1">respostaP2</span><span class="s0">}</span><span class="s4">', P3='</span><span class="s0">${</span><span class="s1">respostaP3</span><span class="s0">}</span><span class="s4">', P4='</span><span class="s0">${</span><span class="s1">respostaP4</span><span class="s0">}</span><span class="s4">'&quot;</span><span class="s2">)</span>
+
+        <span class="s3">// --- PONTUAÇÃO DAS PERGUNTAS ---</span>
+        <span class="s3">// Ajuste as strings e os valores de pontuação conforme as opções do seu quiz!</span>
+
+        <span class="s3">// Pergunta 1: Onde você se sente mais você mesmo? (Exemplo de opções)</span>
+        <span class="s3">// Opção 1: &quot;Explorando a natureza selvagem&quot;</span>
+        <span class="s3">// Opção 2: &quot;Em casa, relaxando com um bom livro ou filme&quot;</span>
+        <span class="s3">// Opção 3: &quot;Socializando com amigos e família&quot;</span>
+        <span class="s3">// Opção 4: &quot;Aprendendo algo novo ou resolvendo um quebra-cabeça&quot;</span>
+        <span class="s0">when </span><span class="s2">{</span>
+            <span class="s1">respostaP1?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;natureza&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; { </span><span class="s3">// &quot;Explorando a natureza&quot;</span>
+                <span class="s1">pontuacaoLobo </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoAguia </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoUrso </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+= </span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoRaposa </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP1?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;casa&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP1?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;livro&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; { </span><span class="s3">// &quot;Em casa, relaxando&quot;</span>
+                <span class="s1">pontuacaoGato </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoTartaruga </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCoruja </span><span class="s2">+= </span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP1?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;socializando&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP1?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;amigos&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; { </span><span class="s3">// &quot;Socializando&quot;</span>
+                <span class="s1">pontuacaoCachorro </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoGolfinho </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoLeao </span><span class="s2">+= </span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP1?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;aprendendo&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP1?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;quebra-cabeça&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; { </span><span class="s3">// &quot;Aprendendo&quot;</span>
+                <span class="s1">pontuacaoRaposa </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCoruja </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoGolfinho </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoGato </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Pergunta 2: Como você lida com desafios inesperados? (Exemplo de opções)</span>
+        <span class="s3">// Opção 1: &quot;Enfrento de frente, com coragem e determinação&quot;</span>
+        <span class="s3">// Opção 2: &quot;Analiso a situação cuidadosamente antes de agir&quot;</span>
+        <span class="s3">// Opção 3: &quot;Peço ajuda ou conselho a amigos ou mentores&quot;</span>
+        <span class="s3">// Opção 4: &quot;Busco uma solução criativa ou fora do comum&quot;</span>
+        <span class="s0">when </span><span class="s2">{</span>
+            <span class="s1">respostaP2?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;enfrenta de frente&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP2?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;coragem&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoLeao </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoUrso </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoLobo </span><span class="s2">+= </span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoAguia </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCachorro </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP2?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;analisa&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP2?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;cuidadosamente&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoCoruja </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoRaposa </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoGato </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoTartaruga </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP2?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;pede ajuda&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP2?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;conselho&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoCachorro </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoGolfinho </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoLeao </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoTartaruga </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP2?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;criativa&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP2?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;fora do comum&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoRaposa </span><span class="s2">+=</span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoGolfinho </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoGato </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoLobo </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoAguia </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Pergunta 3: Qual destes lugares você escolheria para uma aventura? (Exemplo de opções)</span>
+        <span class="s3">// Opção 1: &quot;Uma floresta densa e misteriosa&quot;</span>
+        <span class="s3">// Opção 2: &quot;Altas montanhas com vistas panorâmicas&quot;</span>
+        <span class="s3">// Opção 3: &quot;Uma praia tropical com águas cristalinas&quot;</span>
+        <span class="s3">// Opção 4: &quot;Uma biblioteca antiga cheia de segredos e conhecimento&quot;</span>
+        <span class="s3">// Opção 5: &quot;Um lar aconchegante cercado por quem amo&quot; (se tiver essa opção)</span>
+        <span class="s0">when </span><span class="s2">{</span>
+            <span class="s1">respostaP3?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;floresta&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoLobo </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoUrso </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoRaposa </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCoruja </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP3?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;montanhas&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoAguia </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoLobo </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoUrso </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoLeao </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP3?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;praia&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoGolfinho </span><span class="s2">+=</span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoTartaruga </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoGato </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoAguia </span><span class="s2">+=</span><span class="s5">1 </span><span class="s3">// Águias pescam</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP3?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;biblioteca&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoCoruja </span><span class="s2">+=</span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoRaposa </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoGato</span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoTartaruga </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP3?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;lar aconchegante&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; { </span><span class="s3">// Se tiver essa opção</span>
+                <span class="s1">pontuacaoGato </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCachorro </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoTartaruga</span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoUrso</span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Pergunta 4: Qual destas qualidades mais te define? (Suas opções de RadioButton)</span>
+        <span class="s3">// &quot;Lealdade&quot;</span>
+        <span class="s3">// &quot;Independência&quot;</span>
+        <span class="s3">// &quot;Curiosidade&quot;</span>
+        <span class="s3">// &quot;Calma e paciência&quot;</span>
+        <span class="s3">// &quot;Liderança e Coragem&quot; (exemplo de adição)</span>
+        <span class="s3">// &quot;Sabedoria e Intuição&quot; (exemplo de adição)</span>
+        <span class="s0">when </span><span class="s2">{</span>
+            <span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;Lealdade&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoCachorro </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoLobo </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoLeao </span><span class="s2">+= </span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoGolfinho </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;Independência&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoGato </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoRaposa </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoAguia </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCoruja </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoLobo </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoUrso </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;Curiosidade&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoRaposa </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoGato </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoGolfinho </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCoruja </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCachorro</span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;Calma&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;paciência&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoTartaruga </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+=</span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoCoruja </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoUrso </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoGato </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s3">// Exemplos de mais opções que você poderia ter na P4:</span>
+            <span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;Liderança&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;Coragem&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoLeao </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoAguia </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoUrso </span><span class="s2">+= </span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoLobo </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCachorro </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+            <span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;Sabedoria&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">|| </span><span class="s1">respostaP4?</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s4">&quot;Intuição&quot;</span><span class="s2">, </span><span class="s1">ignoreCase </span><span class="s2">= </span><span class="s0">true</span><span class="s2">) == </span><span class="s0">true </span><span class="s2">-&gt; {</span>
+                <span class="s1">pontuacaoCoruja </span><span class="s2">+= </span><span class="s5">3</span><span class="s2">; </span><span class="s1">pontuacaoTartaruga </span><span class="s2">+= </span><span class="s5">2</span><span class="s2">; </span><span class="s1">pontuacaoRaposa </span><span class="s2">+= </span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoGolfinho </span><span class="s2">+=</span><span class="s5">1</span><span class="s2">; </span><span class="s1">pontuacaoCervo </span><span class="s2">+=</span><span class="s5">1</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">val </span><span class="s1">todasAsPontuacoes </span><span class="s2">= </span><span class="s1">mutableMapOf</span><span class="s2">(</span>
+            <span class="s1">LOBO to pontuacaoLobo</span><span class="s2">, </span><span class="s1">GATO to pontuacaoGato</span><span class="s2">, </span><span class="s1">LEAO to pontuacaoLeao</span><span class="s2">,</span>
+            <span class="s1">CACHORRO to pontuacaoCachorro</span><span class="s2">, </span><span class="s1">CORUJA to pontuacaoCoruja</span><span class="s2">, </span><span class="s1">AGUIA to pontuacaoAguia</span><span class="s2">,</span>
+            <span class="s1">URSO to pontuacaoUrso</span><span class="s2">, </span><span class="s1">RAPOSA to pontuacaoRaposa</span><span class="s2">, </span><span class="s1">CERVO to pontuacaoCervo</span><span class="s2">,</span>
+            <span class="s1">GOLFINHO to pontuacaoGolfinho</span><span class="s2">, </span><span class="s1">TARTARUGA to pontuacaoTartaruga</span>
+        <span class="s2">)</span>
+
+        <span class="s1">Log</span><span class="s2">.</span><span class="s1">i</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Pontuações Calculadas: </span><span class="s0">$</span><span class="s1">todasAsPontuacoes</span><span class="s4">&quot;</span><span class="s2">)</span>
+
+        <span class="s0">val </span><span class="s1">LIMIAR_MINIMO_PONTUACAO_ANIMAL </span><span class="s2">= </span><span class="s5">4 </span><span class="s3">// Ajuste: Com mais animais/pontos, pode aumentar o limiar. Teste!</span>
+
+        <span class="s0">val </span><span class="s1">pontuacoesAltas </span><span class="s2">= </span><span class="s1">todasAsPontuacoes</span><span class="s2">.</span><span class="s1">filterValues </span><span class="s2">{ </span><span class="s1">it </span><span class="s2">&gt;= </span><span class="s1">LIMIAR_MINIMO_PONTUACAO_ANIMAL </span><span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">pontuacoesAltas</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s0">val </span><span class="s1">algumaPontuacao </span><span class="s2">= </span><span class="s1">todasAsPontuacoes</span><span class="s2">.</span><span class="s1">values</span><span class="s2">.</span><span class="s1">any </span><span class="s2">{ </span><span class="s1">it </span><span class="s2">&gt; </span><span class="s5">0 </span><span class="s2">}</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">algumaPontuacao</span><span class="s2">) {</span>
+                <span class="s0">val </span><span class="s1">maxPontuacaoBaixa </span><span class="s2">= </span><span class="s1">todasAsPontuacoes</span><span class="s2">.</span><span class="s1">maxByOrNull </span><span class="s2">{ </span><span class="s1">it</span><span class="s2">.</span><span class="s1">value </span><span class="s2">}</span><span class="s1">?</span><span class="s2">.</span><span class="s1">value ?: </span><span class="s5">0</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">maxPontuacaoBaixa </span><span class="s2">&gt; </span><span class="s5">0</span><span class="s2">) {</span>
+                    <span class="s0">val </span><span class="s1">animaisComMaxPontuacaoBaixa </span><span class="s2">= </span><span class="s1">todasAsPontuacoes</span><span class="s2">.</span><span class="s1">filterValues </span><span class="s2">{ </span><span class="s1">it </span><span class="s2">== </span><span class="s1">maxPontuacaoBaixa </span><span class="s2">}</span>
+                    <span class="s3">// Desempate para pontuação baixa: pode ser aleatório ou o primeiro</span>
+                    <span class="s0">val </span><span class="s1">animalEscolhido </span><span class="s2">= </span><span class="s1">animaisComMaxPontuacaoBaixa</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">.</span><span class="s1">shuffled</span><span class="s2">().</span><span class="s1">firstOrNull</span><span class="s2">() </span><span class="s1">?: animaisComMaxPontuacaoBaixa</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">.</span><span class="s1">first</span><span class="s2">()</span>
+
+                    <span class="s1">Log</span><span class="s2">.</span><span class="s1">i</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Nenhum animal atingiu o limiar (</span><span class="s0">$</span><span class="s1">LIMIAR_MINIMO_PONTUACAO_ANIMAL</span><span class="s4">), mas houve pontuação. Escolhido o de maior pontuação baixa: </span><span class="s0">$</span><span class="s1">animalEscolhido </span><span class="s4">(</span><span class="s0">$</span><span class="s1">maxPontuacaoBaixa</span><span class="s4">)&quot;</span><span class="s2">)</span>
+                    <span class="s0">return when </span><span class="s2">(</span><span class="s1">animalEscolhido</span><span class="s2">) {</span>
+                        <span class="s1">LOBO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">LOBO</span><span class="s2">, </span><span class="s4">&quot;Há um forte instinto e um espírito livre latente em você, buscando conexões verdadeiras.&quot;</span><span class="s2">)</span>
+                        <span class="s1">GATO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">GATO</span><span class="s2">, </span><span class="s4">&quot;Sua independência e charme se destacam, mesmo que você aprecie um momento de tranquilidade.&quot;</span><span class="s2">)</span>
+                        <span class="s1">LEAO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">LEAO</span><span class="s2">, </span><span class="s4">&quot;Uma centelha de coragem e uma presença naturalmente nobre brilham em seu espírito.&quot;</span><span class="s2">)</span>
+                        <span class="s1">CACHORRO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">CACHORRO</span><span class="s2">, </span><span class="s4">&quot;Sua lealdade e um coração amigável são qualidades notáveis que aquecem quem está por perto.&quot;</span><span class="s2">)</span>
+                        <span class="s1">CORUJA </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">CORUJA</span><span class="s2">, </span><span class="s4">&quot;Uma sabedoria tranquila e uma capacidade de observação aguçada guiam seus passos.&quot;</span><span class="s2">)</span>
+                        <span class="s1">AGUIA </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">AGUIA</span><span class="s2">, </span><span class="s4">&quot;Você tem uma visão para o futuro e um desejo inato de alcançar grandes alturas, mesmo que discretamente.&quot;</span><span class="s2">)</span>
+                        <span class="s1">URSO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">URSO</span><span class="s2">, </span><span class="s4">&quot;Sua força interior e uma natureza protetora são admiráveis, oferecendo segurança e conforto.&quot;</span><span class="s2">)</span>
+                        <span class="s1">RAPOSA </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">RAPOSA</span><span class="s2">, </span><span class="s4">&quot;Sua astúcia e notável capacidade de adaptação te ajudam a encontrar caminhos inteligentes.&quot;</span><span class="s2">)</span>
+                        <span class="s1">CERVO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">CERVO</span><span class="s2">, </span><span class="s4">&quot;Uma gentileza e graça naturais emanam de sua personalidade, trazendo calma ao seu redor.&quot;</span><span class="s2">)</span>
+                        <span class="s1">GOLFINHO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">GOLFINHO</span><span class="s2">, </span><span class="s4">&quot;Sua natureza sociável e uma inteligência brilhante te conectam facilmente e com alegria.&quot;</span><span class="s2">)</span>
+                        <span class="s1">TARTARUGA </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">TARTARUGA</span><span class="s2">, </span><span class="s4">&quot;Com paciência e uma resiliência admirável, você constrói seu caminho com sabedoria e constância.&quot;</span><span class="s2">)</span>
+                        <span class="s0">else </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">ESPIRITO_LIVRE</span><span class="s2">, </span><span class="s4">&quot;Sua alma é uma tapeçaria rica e indomável, difícil de definir por um único espírito animal!&quot;</span><span class="s2">)</span>
+                    <span class="s2">}</span>
+                <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                    <span class="s1">Log</span><span class="s2">.</span><span class="s1">w</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Nenhum animal pontuou (todos 0). Retornando Espírito Livre.&quot;</span><span class="s2">)</span>
+                    <span class="s0">return </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">ESPIRITO_LIVRE</span><span class="s2">, </span><span class="s4">&quot;Sua alma é indomável e multifacetada, uma combinação única de qualidades que transcende uma única forma animal!&quot;</span><span class="s2">)</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">Log</span><span class="s2">.</span><span class="s1">w</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Nenhum animal pontuou. Retornando Espírito Livre.&quot;</span><span class="s2">)</span>
+                <span class="s0">return </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">ESPIRITO_LIVRE</span><span class="s2">, </span><span class="s4">&quot;Sua alma é indomável e multifacetada, uma combinação única de qualidades que transcende uma única forma animal!&quot;</span><span class="s2">)</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">val </span><span class="s1">maxPontuacao </span><span class="s2">= </span><span class="s1">pontuacoesAltas</span><span class="s2">.</span><span class="s1">maxByOrNull </span><span class="s2">{ </span><span class="s1">it</span><span class="s2">.</span><span class="s1">value </span><span class="s2">}</span><span class="s1">?</span><span class="s2">.</span><span class="s1">value ?: </span><span class="s5">0</span>
+        <span class="s0">val </span><span class="s1">animaisComMaxPontuacao </span><span class="s2">= </span><span class="s1">pontuacoesAltas</span><span class="s2">.</span><span class="s1">filterValues </span><span class="s2">{ </span><span class="s1">it </span><span class="s2">== </span><span class="s1">maxPontuacao </span><span class="s2">}</span>
+
+        <span class="s0">val </span><span class="s1">animalEscolhido: String</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">animaisComMaxPontuacao</span><span class="s2">.</span><span class="s1">size </span><span class="s2">&gt; </span><span class="s5">1</span><span class="s2">) {</span>
+            <span class="s1">Log</span><span class="s2">.</span><span class="s1">i</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Empate detectado entre </span><span class="s0">${</span><span class="s1">animaisComMaxPontuacao</span><span class="s2">.</span><span class="s1">keys</span><span class="s0">} </span><span class="s4">com </span><span class="s0">$</span><span class="s1">maxPontuacao </span><span class="s4">pontos (acima do limiar).&quot;</span><span class="s2">)</span>
+            <span class="s3">// Desempate aleatório para mais justiça entre os empatados</span>
+            <span class="s1">animalEscolhido </span><span class="s2">= </span><span class="s1">animaisComMaxPontuacao</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">.</span><span class="s1">shuffled</span><span class="s2">().</span><span class="s1">first</span><span class="s2">()</span>
+            <span class="s1">Log</span><span class="s2">.</span><span class="s1">i</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Desempate (acima do limiar): Escolhendo aleatoriamente: </span><span class="s0">$</span><span class="s1">animalEscolhido</span><span class="s4">&quot;</span><span class="s2">)</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">animalEscolhido </span><span class="s2">= </span><span class="s1">animaisComMaxPontuacao</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">.</span><span class="s1">first</span><span class="s2">()</span>
+            <span class="s1">Log</span><span class="s2">.</span><span class="s1">i</span><span class="s2">(</span><span class="s4">&quot;ResultadoFragment&quot;</span><span class="s2">, </span><span class="s4">&quot;Animal Escolhido (acima do limiar): </span><span class="s0">$</span><span class="s1">animalEscolhido </span><span class="s4">com </span><span class="s0">$</span><span class="s1">maxPontuacao </span><span class="s4">pontos.&quot;</span><span class="s2">)</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return when </span><span class="s2">(</span><span class="s1">animalEscolhido</span><span class="s2">) {</span>
+            <span class="s1">LOBO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">LOBO</span><span class="s2">, </span><span class="s4">&quot;Você é o Lobo! Instintivo, leal à sua matilha e com um amor profundo pela liberdade da natureza selvagem. Você valoriza os laços fortes e a autenticidade.&quot;</span><span class="s2">)</span>
+            <span class="s1">GATO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">GATO</span><span class="s2">, </span><span class="s4">&quot;Você é o Gato! Independente, charmoso e aprecia o conforto, mas sempre com uma curiosidade aguçada para a aventura. Seu mistério é cativante.&quot;</span><span class="s2">)</span>
+            <span class="s1">LEAO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">LEAO</span><span class="s2">, </span><span class="s4">&quot;Você é o Leão! Corajoso, líder nato e carismático. Sua presença magnética e determinação inspiram confiança e respeito nos outros.&quot;</span><span class="s2">)</span>
+            <span class="s1">CACHORRO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">CACHORRO</span><span class="s2">, </span><span class="s4">&quot;Você é o Cachorro! Leal, amigável e cheio de uma energia contagiante. Você adora companhia, proteger quem ama e espalhar alegria.&quot;</span><span class="s2">)</span>
+            <span class="s1">CORUJA </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">CORUJA</span><span class="s2">, </span><span class="s4">&quot;Você é a Coruja! Sábia, observadora e prefere a tranquilidade para refletir. Sua visão aguçada e intuição te guiam através dos mistérios da vida.&quot;</span><span class="s2">)</span>
+            <span class="s1">AGUIA </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">AGUIA</span><span class="s2">, </span><span class="s4">&quot;Você é a Águia! Com uma visão ampla e foco aguçado, você busca a liberdade e almeja grandes alturas. Sua nobreza e independência são inspiradoras.&quot;</span><span class="s2">)</span>
+            <span class="s1">URSO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">URSO</span><span class="s2">, </span><span class="s4">&quot;Você é o Urso! Forte, protetor e profundamente conectado com os ciclos da natureza. Você valoriza a introspecção, a força tranquila e o conforto do seu lar.&quot;</span><span class="s2">)</span>
+            <span class="s1">RAPOSA </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">RAPOSA</span><span class="s2">, </span><span class="s4">&quot;Você é a Raposa! Astuta, adaptável e incrivelmente inteligente. Você encontra soluções criativas para os desafios e navega pela vida com sagacidade.&quot;</span><span class="s2">)</span>
+            <span class="s1">CERVO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">CERVO</span><span class="s2">, </span><span class="s4">&quot;Você é o Cervo! Gentil, gracioso e intuitivo. Você se move pela vida com sensibilidade, uma calma nobre e uma forte conexão com o mundo ao seu redor.&quot;</span><span class="s2">)</span>
+            <span class="s1">GOLFINHO </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">GOLFINHO</span><span class="s2">, </span><span class="s4">&quot;Você é o Golfinho! Sociável, inteligente e brincalhão. Você navega pela vida com alegria, comunicação clara e uma habilidade natural para criar laços.&quot;</span><span class="s2">)</span>
+            <span class="s1">TARTARUGA </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">TARTARUGA</span><span class="s2">, </span><span class="s4">&quot;Você é a Tartaruga! Sábia, paciente e resiliente. Você segue seu próprio ritmo, construindo uma base sólida e enfrentando a vida com calma e determinação.&quot;</span><span class="s2">)</span>
+            <span class="s0">else </span><span class="s2">-&gt; </span><span class="s1">Pair</span><span class="s2">(</span><span class="s1">ESPIRITO_LIVRE</span><span class="s2">, </span><span class="s4">&quot;Sua alma é uma tapeçaria rica e indomável, transcendendo uma única forma animal. Você é uma combinação única de qualidades!&quot;</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

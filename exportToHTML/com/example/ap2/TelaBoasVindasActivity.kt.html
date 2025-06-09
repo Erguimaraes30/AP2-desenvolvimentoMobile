@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>TelaBoasVindasActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+TelaBoasVindasActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">ap2</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log </span><span class="s3">// Adicionado para depuração</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">SeekBar</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span>
+<span class="s3">// import android.widget.Toast // Não estamos mais usando Toast aqui, mas pode ser útil</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span>
+
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">textfield</span><span class="s2">.</span><span class="s1">TextInputEditText</span>
+
+<span class="s0">class </span><span class="s1">TelaBoasVindasActivity : AppCompatActivity</span><span class="s2">() {</span>
+
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">editTextNome: TextInputEditText </span><span class="s3">// Para o nome</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">seekBarIdade: SeekBar</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">textViewIdadeSelecionada: TextView</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">btnComecar: Button</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">MIN_AGE </span><span class="s2">= </span><span class="s4">1</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">MAX_AGE </span><span class="s2">= </span><span class="s4">100</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState: Bundle?</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">)</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_tela_boas_vindas</span><span class="s2">)</span>
+
+        <span class="s3">// Referências das Views do XML</span>
+        <span class="s1">editTextNome </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">editTextNome</span><span class="s2">)</span>
+        <span class="s1">textViewIdadeSelecionada </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textViewIdadeSelecionada</span><span class="s2">) </span><span class="s3">// Para mostrar a idade</span>
+        <span class="s1">seekBarIdade </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">seekBarIdade</span><span class="s2">) </span><span class="s3">// O SeekBar</span>
+        <span class="s1">btnComecar </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">btnComecar</span><span class="s2">)</span>
+
+        <span class="s3">// Configurar o SeekBar</span>
+        <span class="s3">// O valor do seekBar.progress vai de 0 a (MAX_AGE - MIN_AGE)</span>
+        <span class="s3">// O valor exibido e usado será seekBar.progress + MIN_AGE</span>
+        <span class="s1">seekBarIdade</span><span class="s2">.</span><span class="s1">max </span><span class="s2">= </span><span class="s1">MAX_AGE </span><span class="s2">- </span><span class="s1">MIN_AGE </span><span class="s3">// Para que o progress vá de 0 a 99 (100 - 1)</span>
+
+        <span class="s3">// Definir um valor inicial para o SeekBar (ex: para começar com 18 anos, progress = 17)</span>
+        <span class="s0">val </span><span class="s1">initialProgress </span><span class="s2">= </span><span class="s4">17 </span><span class="s3">// Idade inicial de 18 (17 + MIN_AGE)</span>
+        <span class="s1">seekBarIdade</span><span class="s2">.</span><span class="s1">progress </span><span class="s2">= </span><span class="s1">initialProgress</span>
+
+        <span class="s3">// Atualizar o TextView com o valor inicial do SeekBar</span>
+        <span class="s1">textViewIdadeSelecionada</span><span class="s2">.</span><span class="s1">text </span><span class="s2">= (</span><span class="s1">seekBarIdade</span><span class="s2">.</span><span class="s1">progress </span><span class="s2">+ </span><span class="s1">MIN_AGE</span><span class="s2">).</span><span class="s1">toString</span><span class="s2">()</span>
+
+        <span class="s1">seekBarIdade</span><span class="s2">.</span><span class="s1">setOnSeekBarChangeListener</span><span class="s2">(</span><span class="s0">object </span><span class="s1">: SeekBar</span><span class="s2">.</span><span class="s1">OnSeekBarChangeListener </span><span class="s2">{</span>
+            <span class="s1">override </span><span class="s0">fun </span><span class="s1">onProgressChanged</span><span class="s2">(</span><span class="s1">seekBar: SeekBar?</span><span class="s2">, </span><span class="s1">progress: Int</span><span class="s2">, </span><span class="s1">fromUser: Boolean</span><span class="s2">) {</span>
+                <span class="s3">// progress aqui vai de 0 a (MAX_AGE - MIN_AGE)</span>
+                <span class="s0">val </span><span class="s1">idadeAtual </span><span class="s2">= </span><span class="s1">progress </span><span class="s2">+ </span><span class="s1">MIN_AGE</span>
+                <span class="s1">textViewIdadeSelecionada</span><span class="s2">.</span><span class="s1">text </span><span class="s2">= </span><span class="s1">idadeAtual</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">()</span>
+            <span class="s2">}</span>
+
+            <span class="s1">override </span><span class="s0">fun </span><span class="s1">onStartTrackingTouch</span><span class="s2">(</span><span class="s1">seekBar: SeekBar?</span><span class="s2">) {</span>
+                <span class="s3">// Opcional: Ação quando o usuário começa a arrastar</span>
+            <span class="s2">}</span>
+
+            <span class="s1">override </span><span class="s0">fun </span><span class="s1">onStopTrackingTouch</span><span class="s2">(</span><span class="s1">seekBar: SeekBar?</span><span class="s2">) {</span>
+                <span class="s3">// Opcional: Ação quando o usuário para de arrastar</span>
+            <span class="s2">}</span>
+        <span class="s2">})</span>
+
+        <span class="s1">btnComecar</span><span class="s2">.</span><span class="s1">setOnClickListener </span><span class="s2">{</span>
+            <span class="s0">val </span><span class="s1">nome </span><span class="s2">= </span><span class="s1">editTextNome</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">()</span>
+            <span class="s0">val </span><span class="s1">idade </span><span class="s2">= </span><span class="s1">seekBarIdade</span><span class="s2">.</span><span class="s1">progress </span><span class="s2">+ </span><span class="s1">MIN_AGE </span><span class="s3">// Obter idade do SeekBar</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">nome</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                <span class="s3">// Usar o TextInputLayout para mostrar o erro é melhor se ele existir</span>
+                <span class="s0">val </span><span class="s1">nomeLayout </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">textfield</span><span class="s2">.</span><span class="s1">TextInputLayout</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textFieldNomeLayout</span><span class="s2">)</span>
+                <span class="s1">nomeLayout</span><span class="s2">.</span><span class="s1">error </span><span class="s2">= </span><span class="s5">&quot;Nome é obrigatório&quot;</span>
+                <span class="s1">editTextNome</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">() </span><span class="s3">// Ainda foca no TextInputEditText</span>
+                <span class="s0">return</span><span class="s1">@setOnClickListener</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">val </span><span class="s1">nomeLayout </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">textfield</span><span class="s2">.</span><span class="s1">TextInputLayout</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textFieldNomeLayout</span><span class="s2">)</span>
+                <span class="s1">nomeLayout</span><span class="s2">.</span><span class="s1">error </span><span class="s2">= </span><span class="s0">null </span><span class="s3">// Limpar erro</span>
+            <span class="s2">}</span>
+
+            <span class="s3">// A validação de idade (vazio, formato, range) não é mais necessária como antes,</span>
+            <span class="s3">// pois o SeekBar já garante um valor numérico dentro do range configurado.</span>
+
+            <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s5">&quot;TelaBoasVindas&quot;</span><span class="s2">, </span><span class="s5">&quot;Nome: </span><span class="s0">$</span><span class="s1">nome</span><span class="s5">, Idade: </span><span class="s0">$</span><span class="s1">idade</span><span class="s5">&quot;</span><span class="s2">) </span><span class="s3">// Log para depuração</span>
+
+            <span class="s0">val </span><span class="s1">intent </span><span class="s2">= </span><span class="s1">Intent</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">Pergunta1Activity::</span><span class="s0">class</span><span class="s2">.</span><span class="s1">java</span><span class="s2">)</span>
+            <span class="s1">intent</span><span class="s2">.</span><span class="s1">putExtra</span><span class="s2">(</span><span class="s5">&quot;NOME_USUARIO&quot;</span><span class="s2">, </span><span class="s1">nome</span><span class="s2">)</span>
+            <span class="s1">intent</span><span class="s2">.</span><span class="s1">putExtra</span><span class="s2">(</span><span class="s5">&quot;IDADE_USUARIO&quot;</span><span class="s2">, </span><span class="s1">idade</span><span class="s2">) </span><span class="s3">// Passa o Int diretamente</span>
+            <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">)</span>
+            <span class="s3">// finish() // Descomente se quiser fechar esta activity</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

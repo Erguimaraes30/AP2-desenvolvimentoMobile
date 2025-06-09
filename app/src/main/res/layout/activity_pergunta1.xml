@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_vertical"
+    tools:context=".Pergunta1Activity">
+
+    <TextView
+        android:id="@+id/textViewNumeroPergunta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pergunta 1 de 4"
+        android:textSize="16sp"
+        android:layout_gravity="end"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewPergunta1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Você prefere passar seu tempo livre:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        android:gravity="center_horizontal"
+        android:lineSpacingMultiplier="1.2"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupPergunta1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonP1OpcaoA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explorando a natureza e atividades ao ar livre."
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonP1OpcaoB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Em casa, relaxando confortavelmente."
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonP1OpcaoC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Socializando com um grande grupo de amigos."
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonP1OpcaoD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aprendendo algo novo ou resolvendo quebra-cabeças."
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnProximaPergunta1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Próxima Pergunta"
+        android:textSize="18sp"
+        app:backgroundTint="#00796B"
+        android:textColor="@android:color/white"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"/>
+
+</LinearLayout>

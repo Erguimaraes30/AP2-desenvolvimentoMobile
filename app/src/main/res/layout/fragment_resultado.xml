@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    tools:context=".ResultadoFragment">
+
+    <TextView
+        android:id="@+id/textViewNomeUsuarioResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        tools:text="Olá, Aventureiro(a)!" />
+
+    <ImageView
+        android:id="@+id/imageViewAnimal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewNomeUsuarioResultado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@drawable/placeholder_animal" />
+
+    <TextView
+        android:id="@+id/textViewVoceE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:text="Seu Espírito Animal é:"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/imageViewAnimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewAnimalResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        app:layout_constraintTop_toBottomOf="@id/textViewVoceE"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="LOBO" />
+
+    <ScrollView
+        android:id="@+id/scrollViewDescricao"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/btnSaibaMais"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewAnimalResultado"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/textViewDescricaoAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:lineSpacingMultiplier="1.2"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            tools:text="Você é instintivo, leal à sua matilha e ama a liberdade da natureza selvagem! Uma descrição um pouco mais longa para testar o scroll e como ele se comporta com bastante texto." />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnSaibaMais"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="Saiba Mais Sobre Seu Espírito Animal"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:backgroundTint="#00796B"
+        app:layout_constraintBottom_toTopOf="@id/btnRefazerQuiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnRefazerQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="Refazer o Quiz"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:backgroundTint="#00796B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
