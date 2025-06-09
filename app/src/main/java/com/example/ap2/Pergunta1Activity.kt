@@ -16,32 +16,31 @@ class Pergunta1Activity : AppCompatActivity() {
     private lateinit var radioGroupOpcoes: RadioGroup
     private lateinit var btnProxima: Button
 
-    // Variáveis para guardar os dados do usuário
+
     private var nomeUsuario: String? = null
     private var idadeUsuario: Int = -1
 
-    // Variável para guardar a resposta desta pergunta
+
     private var respostaPergunta1: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pergunta1)
 
-        // Recuperar dados da TelaBoasVindasActivity
+
         nomeUsuario = intent.getStringExtra("NOME_USUARIO")
         idadeUsuario = intent.getIntExtra("IDADE_USUARIO", -1)
 
-        // Se quiser usar o nome/idade aqui, por exemplo, num Toast de boas-vindas personalizado:
+
         if (!nomeUsuario.isNullOrEmpty()) {
-            // Toast.makeText(this, "Vamos começar, $nomeUsuario!", Toast.LENGTH_SHORT).show()
+
         }
 
-        textViewPergunta = findViewById(R.id.textViewPergunta1) // ID do seu TextView da pergunta
-        radioGroupOpcoes = findViewById(R.id.radioGroupPergunta1) // ID do seu RadioGroup
-        btnProxima = findViewById(R.id.btnProximaPergunta1) // ID do seu botão "Próxima"
+        textViewPergunta = findViewById(R.id.textViewPergunta1)
+        radioGroupOpcoes = findViewById(R.id.radioGroupPergunta1)
+        btnProxima = findViewById(R.id.btnProximaPergunta1)
 
-        // Configurar a pergunta (você pode carregar isso de uma lista ou de recursos de string)
-        // textViewPergunta.text = "Qual sua atividade favorita em um dia de folga?"
+
 
         btnProxima.setOnClickListener {
             val selectedOptionId = radioGroupOpcoes.checkedRadioButtonId
@@ -49,9 +48,9 @@ class Pergunta1Activity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor, selecione uma opção.", Toast.LENGTH_SHORT).show()
             } else {
                 val radioButtonSelecionado = findViewById<RadioButton>(selectedOptionId)
-                respostaPergunta1 = radioButtonSelecionado.text.toString() // Ou um valor associado à opção
+                respostaPergunta1 = radioButtonSelecionado.text.toString()
 
-                // Navegar para a Pergunta2Activity
+
                 val intent = Intent(this, Pergunta2Activity::class.java)
                 intent.putExtra("NOME_USUARIO", nomeUsuario)
                 intent.putExtra("IDADE_USUARIO", idadeUsuario)

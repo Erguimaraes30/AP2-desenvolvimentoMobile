@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Pergunta4Activity">
 
-    <!-- Layout para os elementos da pergunta (será escondido) -->
+
     <LinearLayout
         android:id="@+id/contentLayoutPerguntasP4"
         android:layout_width="0dp"
@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="visible"> <!-- Inicialmente visível -->
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/textViewNumeroPergunta4"
@@ -101,8 +101,8 @@
 
     </LinearLayout>
 
-    <!-- Container para o Fragmento de Resultado (inicialmente escondido) -->
-    <!-- Este FrameLayout ocupará toda a tela quando visível -->
+
+
     <FrameLayout
         android:id="@+id/fragment_container_resultado_p4_wrapper"
         android:layout_width="0dp"
@@ -111,7 +111,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"> <!-- Inicialmente escondido -->
+        android:visibility="gone">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_resultado_p4"

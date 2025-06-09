@@ -1,4 +1,4 @@
-package com.example.ap2 // Seu package name
+package com.example.ap2
 
 import android.os.Bundle
 import android.util.Log
@@ -15,19 +15,19 @@ import androidx.appcompat.app.AppCompatActivity
 class Pergunta4Activity : AppCompatActivity() {
 
     private lateinit var radioGroupPergunta4: RadioGroup
-    private lateinit var btnProximoP4: Button // Espera R.id.btnProximoP4
+    private lateinit var btnProximoP4: Button
 
-    // Layouts para alternar visibilidade
+
     private lateinit var contentLayoutPerguntasP4: LinearLayout
     private lateinit var fragmentContainerWrapper: FrameLayout
 
-    // Variáveis para guardar os dados do usuário e respostas anteriores
+
     private var nomeUsuario: String? = null
     private var respostaPergunta1: String? = null
     private var respostaPergunta2: String? = null
     private var respostaPergunta3: String? = null
 
-    // Variável para guardar a resposta desta pergunta
+
     private var respostaPergunta4: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class Pergunta4Activity : AppCompatActivity() {
 
         Log.d("Pergunta4Activity", "onCreate: Iniciando Pergunta 4")
 
-        // Recuperar dados das Activities anteriores
+
         nomeUsuario = intent.getStringExtra("NOME_USUARIO")
         respostaPergunta1 = intent.getStringExtra("RESPOSTA_PERGUNTA_1")
         respostaPergunta2 = intent.getStringExtra("RESPOSTA_PERGUNTA_2")
@@ -44,13 +44,13 @@ class Pergunta4Activity : AppCompatActivity() {
 
         Log.i("Pergunta4Activity", "Dados Recebidos: Nome=$nomeUsuario, P1=$respostaPergunta1, P2=$respostaPergunta2, P3=$respostaPergunta3")
 
-        // Inicializar Views de controle de layout PRIMEIRO
+
         contentLayoutPerguntasP4 = findViewById(R.id.contentLayoutPerguntasP4)
         fragmentContainerWrapper = findViewById(R.id.fragment_container_resultado_p4_wrapper)
 
-        // Inicializar Views DENTRO do contentLayoutPerguntasP4
+
         radioGroupPergunta4 = contentLayoutPerguntasP4.findViewById(R.id.radioGroupPergunta4)
-        btnProximoP4 = contentLayoutPerguntasP4.findViewById(R.id.btnProximoP4) // CORRESPONDENDO AO XML CORRIGIDO
+        btnProximoP4 = contentLayoutPerguntasP4.findViewById(R.id.btnProximoP4)
 
 
         btnProximoP4.setOnClickListener {
@@ -74,10 +74,10 @@ class Pergunta4Activity : AppCompatActivity() {
     private fun mostrarResultado() {
         Log.i("Pergunta4Activity", "mostrarResultado: Preparando para exibir o ResultadoFragment.")
 
-        // Esconder o layout da pergunta
+
         contentLayoutPerguntasP4.visibility = View.GONE
 
-        // Mostrar o container do fragmento
+
         fragmentContainerWrapper.visibility = View.VISIBLE
 
         val resultadoFragment = ResultadoFragment().apply {

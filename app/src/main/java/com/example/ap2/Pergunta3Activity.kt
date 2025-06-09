@@ -16,27 +16,26 @@ class Pergunta3Activity : AppCompatActivity() {
     private lateinit var radioGroupOpcoes: RadioGroup
     private lateinit var btnProxima: Button
 
-    // Variáveis para guardar os dados do usuário e respostas anteriores
+
     private var nomeUsuario: String? = null
     private var idadeUsuario: Int = -1
     private var respostaPergunta1: String? = null
     private var respostaPergunta2: String? = null
 
-    // Variável para guardar a resposta desta pergunta
+
     private var respostaPergunta3: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pergunta3)
 
-        // Recuperar dados da Pergunta2Activity
+
         nomeUsuario = intent.getStringExtra("NOME_USUARIO")
         idadeUsuario = intent.getIntExtra("IDADE_USUARIO", -1)
         respostaPergunta1 = intent.getStringExtra("RESPOSTA_PERGUNTA_1")
         respostaPergunta2 = intent.getStringExtra("RESPOSTA_PERGUNTA_2")
 
-        // Exibir um Toast para depuração (opcional)
-        // Toast.makeText(this, "P1: $respostaPergunta1, P2: $respostaPergunta2", Toast.LENGTH_SHORT).show()
+
 
         textViewPergunta = findViewById(R.id.textViewPergunta3)
         radioGroupOpcoes = findViewById(R.id.radioGroupPergunta3)
@@ -50,13 +49,13 @@ class Pergunta3Activity : AppCompatActivity() {
                 val radioButtonSelecionado = findViewById<RadioButton>(selectedOptionId)
                 respostaPergunta3 = radioButtonSelecionado.text.toString()
 
-                // Navegar para a Pergunta4Activity
+
                 val intent = Intent(this, Pergunta4Activity::class.java)
                 intent.putExtra("NOME_USUARIO", nomeUsuario)
                 intent.putExtra("IDADE_USUARIO", idadeUsuario)
                 intent.putExtra("RESPOSTA_PERGUNTA_1", respostaPergunta1)
                 intent.putExtra("RESPOSTA_PERGUNTA_2", respostaPergunta2)
-                intent.putExtra("RESPOSTA_PERGUNTA_3", respostaPergunta3) // Adiciona a resposta da P3
+                intent.putExtra("RESPOSTA_PERGUNTA_3", respostaPergunta3)
                 startActivity(intent)
             }
         }
